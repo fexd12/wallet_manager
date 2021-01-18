@@ -15,12 +15,15 @@ To run the project:
 ```
 .
 ├── .vscode/ - Visual Studio Code configuration files
-├── backend/ - Backend App
-│ ├── routes/ - Handles API calls for routes
-│ ├── scripts/ - scripts to publish
-│ ├── app.js - Adds middleware to the express server
-│ ├── constants.js - Defines the constants for the endpoints and port
-│ └── server.js - Configures Port and HTTP Server
+├─ backend/ - Backend App
+│ │ ├─ app/ - Flask app
+│ │ ├── api/ - Handles API calls for routes
+│ │ ├── models/ - Models Database (SQLAlchemy)
+│ │ └── __init__.py - Flask create App
+│ ├── app.py - Configures Port and HTTP Server
+│ ├── config.js - Class for setting environment variables
+└─└── setup.py- Manage application packages
+
 ├── frontend/ - Frontend App
 │ ├── public/ - public static files
 │ ├── scripts/ - scripts to publish
@@ -48,16 +51,17 @@ To start the frontend application manually:
 
 ### Backend
 
-The backend is based on [Express Generator](https://expressjs.com/en/starter/generator.html).
-
-The most important scripts in the `package.json` are:
-  - start: serves the backend in development on http://localhost:3001/.
-  - publish: copies the backend files to the `publish` folder.
+The backend is based on [Flask](https://flask.palletsprojects.com/en/1.1.x/).
 
 To start the backend application manually:
   1. Open a terminal and navigate to the `backend` folder path.
-  2. Use `yarn install` or `npm install` to install backend dependencies.
-  3. Use `yarn start` or `npm start` to start backend app in development.
+  2. Create python virtual env `python -m venv venv`.
+  3. Load virtual env `Windows: venv\Scripts\activate ` or `Linux: source venv/bin/activate`.
+  4. Create new file called `development.env` and insert your database url like `DATABASE_URL = postgresql://{ip_database}/wallet_manager?user={user database}&password={password database}`
+  4. If you don't have the database, create the new database called  `wallet_manager` in Postgresql dashboard or other manager.
+  5. Open the terminal if virtual env enabled, type `flask db init` `flask db migrate` `flask db upgrade` for create tables 
+  2. Use `pip install -e .` to install backend dependencies.
+  3. Use `flask run` to start backend app in development.
 
 ## Deployment
 
