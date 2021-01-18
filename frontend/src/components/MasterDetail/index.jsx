@@ -1,12 +1,12 @@
 import React from "react";
 import classnames from "classnames";
 import WarningMessage from "../WarningMessage";
-import Detail from "./Detail";
-import MasterList from "./MasterList";
+import Detail from "../Detail";
+import MasterList from "../MasterList";
 import styles from "./styles.module.css";
 import PropTypes from "prop-types";
 
-const MasterDetail = ({sampleOrders,currentSampleOrder,setCurrentSampleOrder,warningMessage,onWarningClose}) => {
+const MasterDetail = ({sampleOrders,currentSampleOrder,setCurrentSampleOrder,warningMessage,onWarningClose,ComponentRender}) => {
 
   const sidebarStyle = classnames(
     "col-2",
@@ -20,13 +20,13 @@ const MasterDetail = ({sampleOrders,currentSampleOrder,setCurrentSampleOrder,war
       <MasterList
         selectSampleOrder={setCurrentSampleOrder}
         sampleOrder={sampleOrder}
-        key={sampleOrder.id}
+        key={sampleOrder.id_tipo_ativo}
         isActive={sampleOrder === currentSampleOrder}
       />
     );
   };
   const bussinesDetails = () => {
-    return currentSampleOrder.id ? (
+    return currentSampleOrder ? (
       <Detail textSampleData={currentSampleOrder} />
     ) : null;
   };
@@ -37,10 +37,10 @@ const MasterDetail = ({sampleOrders,currentSampleOrder,setCurrentSampleOrder,war
         <div className="row">
           <div className={sidebarStyle}>
             <div className="list-group list-group-flush border-bottom">
-              {sampleOrders.map((x) => bussines(x))}
+              {sampleOrders.length > 0 ? (sampleOrders.map((x) => bussines(x))) : null}
             </div>
           </div>
-          {bussinesDetails()}
+          {ComponentRender ? ComponentRender : bussinesDetails()}
         </div>
       </div>
       <WarningMessage
@@ -57,7 +57,8 @@ MasterDetail.propTypes = {
     currentSampleOrder: PropTypes.object,
     setCurrentSampleOrder:PropTypes.func,
     warningMessage:PropTypes.object,
-    onWarningClose:PropTypes.func
+    onWarningClose:PropTypes.func,
+    ComponentRender:PropTypes.node
 }
 
 export default MasterDetail;
