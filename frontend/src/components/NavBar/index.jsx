@@ -9,15 +9,18 @@ const NavBar = () => {
           Wallet Manager
         </Link>
         <div className="navbar-nav">
-          <Link className="nav-item nav-link active" to="/">
+          <Link className="nav-item nav-link active" to="/ativos">
             Meus Ativos
           </Link>
-          <Link className="nav-item nav-link active" to="sugestao">
+          <Link className="nav-item nav-link active" to="/sugestao">
             Sugestão de Ativos
+          </Link>
+          <Link className="nav-item nav-link active" to="/">
+            Pagina Inicial
           </Link>
         </div>
       </nav>
     </React.Fragment>
   );
-}
+};
 export default NavBar;
