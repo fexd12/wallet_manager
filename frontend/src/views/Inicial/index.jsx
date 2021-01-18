@@ -1,14 +1,16 @@
-﻿import React from "react";
-import Table from "../../components/Table";
+﻿import React,{useEffect,useState} from "react";
+import MasterDetail from '../../components/MasterDetail';
+import api from '../../sevices/api'
 
 const Inicial = () => {
-  return (
-    <main id="mainContent">
-      <div className="container">
-        <Table></Table>
-      </div>
-    </main>
-  );
+    return (
+        
+        <div>
+            <h1>
+            Pagina Inicial
+            </h1>
+        </div>
+        )
 };
 
 export default Inicial;
