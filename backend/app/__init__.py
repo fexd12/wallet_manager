@@ -12,9 +12,6 @@ def create_app(config_class = Config):
     app = Flask(__name__)
     app.config.from_object(config_class)
 
-    # app.redis = Redis.from_url(app.config['REDIS_URL'])
-    # app.task_queue = rq.Queue('pi_task',connection=app.redis)
-
     cors.init_app(app)
     db.init_app(app)
     migrate.init_app(app,db)
@@ -23,6 +20,9 @@ def create_app(config_class = Config):
 
     from app.api.ativos import bp as ativos_bp
     app.register_blueprint(ativos_bp,url_prefix='/ativos')
+
+    from app.api.tipos import bp as tipos_bp
+    app.register_blueprint(tipos_bp,url_prefix='/tipos')
 
     return app
 

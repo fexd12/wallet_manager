@@ -1,7 +1,7 @@
 from . import bp
 from app import cross_origin,db
 from flask import jsonify,request
-from app.models import Ativo
+from app.models import Ativo,TipoAtivo
 
 @bp.route('/',methods=['GET','POST'])
 @cross_origin()
