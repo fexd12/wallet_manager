@@ -16,7 +16,7 @@ const MasterList = ({ sampleOrder, selectSampleOrder, isActive }) => {
         { "active": isActive }
       )}
     >
-      <img src={ sampleOrder.imageSrc ? sampleOrder.imageSrc : imgGreyAvatar} alt={sampleOrder.title} className="mr-3" />
+      <img src={ sampleOrder.imageSrc ? sampleOrder.imageSrc : imgGreyAvatar} alt={sampleOrder.nome} className="mr-3" />
       {sampleOrder.nome}
     </button>
   );

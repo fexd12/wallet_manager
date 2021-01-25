@@ -5,8 +5,9 @@ import Detail from "../Detail";
 import MasterList from "../MasterList";
 import styles from "./styles.module.css";
 import PropTypes from "prop-types";
+import CardDetail from '../../components/CardDetail'
 
-const MasterDetail = ({sampleOrders,currentSampleOrder,setCurrentSampleOrder,warningMessage,onWarningClose,ComponentRender}) => {
+const MasterDetail = ({sampleOrders,currentSampleOrder,setCurrentSampleOrder,warningMessage,onWarningClose,ativo}) => {
 
   const sidebarStyle = classnames(
     "col-2",
@@ -25,11 +26,20 @@ const MasterDetail = ({sampleOrders,currentSampleOrder,setCurrentSampleOrder,war
       />
     );
   };
-  const bussinesDetails = () => {
-    return currentSampleOrder ? (
-      <Detail textSampleData={currentSampleOrder} />
-    ) : null;
-  };
+
+//   const bussinesDetails = () => {
+//     return currentSampleOrder ? (
+//       <Detail textSampleData={currentSampleOrder} />
+//     ) : null;
+//   };
+
+  const separaAtivo = ()=>{
+    let separa = ativo.filter(x=>currentSampleOrder.id_tipo_ativo === x.tipo_ativo);
+    console.log(separa)
+    return (
+    <CardDetail ativo={separa}/>
+    )
+  }
 
   return (
     <main id="mainContent">
@@ -40,7 +50,7 @@ const MasterDetail = ({sampleOrders,currentSampleOrder,setCurrentSampleOrder,war
               {sampleOrders.length > 0 ? (sampleOrders.map((x) => bussines(x))) : null}
             </div>
           </div>
-          {ComponentRender ? ComponentRender : bussinesDetails()}
+          {separaAtivo() }
         </div>
       </div>
       <WarningMessage
@@ -58,7 +68,7 @@ MasterDetail.propTypes = {
     setCurrentSampleOrder:PropTypes.func,
     warningMessage:PropTypes.object,
     onWarningClose:PropTypes.func,
-    ComponentRender:PropTypes.node
+    ativo:PropTypes.array
 }
 
 export default MasterDetail;
