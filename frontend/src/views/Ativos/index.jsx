@@ -10,11 +10,9 @@ const Ativos = () => {
         warningMessageOpen: false,
         warningMessageText: "",
     });
+
     const [ativos,setAtivos] = useState([]);
 
-    const closeWarningMessage = () => {
-        setWarningMessage({ warningMessageOpen: false, warningMessageText: "" });
-    };
 
     useEffect(() => {
         api.get('/tipos').then(response=>{
@@ -22,8 +20,7 @@ const Ativos = () => {
             setTipoAtivos(res);
             setCurrentTipoAtivos(res[0]);
             
-
-        }).catch(error=>{
+        }).catch(()=>{
             setWarningMessage({
                 warningMessageOpen: true,
                 warningMessageText: `Erro ao trazer os tipos de ativos`,
@@ -37,7 +34,7 @@ const Ativos = () => {
             const res = response.data.items;
             setAtivos(res);
 
-        }).catch(error=>{
+        }).catch(()=>{
             setWarningMessage({
                 warningMessageOpen: true,
                 warningMessageText: `Erro ao trazer os ativos`,
@@ -50,7 +47,7 @@ const Ativos = () => {
             currentSampleOrder = {currentTipoAtivos}
             setCurrentSampleOrder = {setCurrentTipoAtivos}
             warningMessage = {warningMessage}
-            onWarningClose = {closeWarningMessage}
+            onWarningClose = {() => setWarningMessage({ warningMessageOpen: false, warningMessageText: "" })}
             ativo = {ativos}
         />
     );
