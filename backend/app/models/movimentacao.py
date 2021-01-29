@@ -14,4 +14,4 @@ class Movimentacao(db.Model,AutoAttributes):
     ativo_id = db.Column(db.Integer, db.ForeignKey('ativo.id_ativo'),nullable=False)
     carteira_id = db.Column(db.Integer, db.ForeignKey('carteira.id_carteira'),nullable=False)
 
-    attrs = ['id_movimentacao','preco','quantidade','data','taxas']
+    attrs = ['id_movimentacao','preco','quantidade','data','taxas','tipo']

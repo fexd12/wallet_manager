@@ -50,6 +50,8 @@ def ativos():
         items = []
 
         for row in list(result):
+            extrato = Movimentacao.query.filter_by(ativo_id=row[0]).all()
+            print(extrato)
             items.append({
                 "ativo_id":row[0],
                 "id_movimentacao":row[1],
@@ -57,7 +59,8 @@ def ativos():
                 "ticker":row[3],
                 "nome":row[4],
                 "tipo_ativo":row[5],
-                "preco_medio":float(row[6])
+                "preco_medio":float(row[6]),
+                "extrato":[item.to_dict() for item in extrato]
             })
 
         return jsonify({
