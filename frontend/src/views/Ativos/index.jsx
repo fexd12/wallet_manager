@@ -10,10 +10,23 @@ const Ativos = () => {
         warningMessageOpen: false,
         warningMessageText: "",
     });
-
+    
     const [ativos,setAtivos] = useState([]);
+    
+    function getAtivos (){
 
+        api.get('/ativos').then(response=>{
+            const res = response.data.items;
+            setAtivos(res);
 
+        }).catch(()=>{
+            setWarningMessage({
+                warningMessageOpen: true,
+                warningMessageText: `Erro ao trazer os ativos`,
+            });
+        })
+    }
+    
     useEffect(() => {
         api.get('/tipos').then(response=>{
             const res = response.data.items;
@@ -30,17 +43,23 @@ const Ativos = () => {
     },[]);
 
     useEffect(()=>{
-        api.get('/ativos').then(response=>{
-            const res = response.data.items;
-            setAtivos(res);
+        getAtivos()
+    },[]);
 
+    const onSubmit = (url,payload) =>{
+        api.post(url,payload).then(()=>{
+            setWarningMessage({
+                warningMessageOpen: true,
+                warningMessageText: `Ativos inseridos com sucesso`,
+            });
+            getAtivos()
         }).catch(()=>{
             setWarningMessage({
                 warningMessageOpen: true,
-                warningMessageText: `Erro ao trazer os ativos`,
+                warningMessageText: `Erro inserir os ativos`,
             });
         })
-    },[]);
+    }
 
     return (
         <MasterDetail sampleOrders = {tipoAtivos}
@@ -49,6 +68,7 @@ const Ativos = () => {
             warningMessage = {warningMessage}
             onWarningClose = {() => setWarningMessage({ warningMessageOpen: false, warningMessageText: "" })}
             ativo = {ativos}
+            handleSubmit = {onSubmit}
         />
     );
 };

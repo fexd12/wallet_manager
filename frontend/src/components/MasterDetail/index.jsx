@@ -14,7 +14,8 @@ const MasterDetail = ({
   setCurrentSampleOrder,
   warningMessage,
   onWarningClose,
-  ativo
+  ativo,
+  handleSubmit
 
 }) => {
 
@@ -84,7 +85,7 @@ const MasterDetail = ({
             <Button style={{ marginTop: "10px" }} onClick={onShowModal}>
               Adicionar ativo
             </Button>
-            <FormAtivos showModal={show} onHide = {onHideModal} ativo = {ativos}/>
+            <FormAtivos tipos={sampleOrders} showModal={show} onHide = {onHideModal} ativo = {ativos} handleSave={handleSubmit}/>
           </div>
           {separaAtivo()}
         </div>
@@ -104,7 +105,8 @@ MasterDetail.propTypes = {
   setCurrentSampleOrder: PropTypes.func,
   warningMessage: PropTypes.object,
   onWarningClose: PropTypes.func,
-  ativo: PropTypes.array
+  ativo: PropTypes.array,
+  handleSubmit: PropTypes.func
 };
 
 export default MasterDetail;
