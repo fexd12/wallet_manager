@@ -24,6 +24,9 @@ def create_app(config_class = Config):
     from app.api.tipos import bp as tipos_bp
     app.register_blueprint(tipos_bp,url_prefix='/tipos')
 
+    from app.api.movimentacao import bp as movimentacao_bp
+    app.register_blueprint(movimentacao_bp,url_prefix='/movimentacao')
+
     return app
 
 import app.models
