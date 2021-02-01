@@ -33,9 +33,7 @@ def ativos():
 
         with db.engine.connect() as conn:
             query = text("""
-                SELECT  DISTINCT(mov.ativo_id),
-                        mov.id_movimentacao, 
-                        mov.carteira_id,
+                SELECT  DISTINCT mov.ativo_id,
                         atv.ticker,
                         nome,
                         atv.tipo_ativo_id,
@@ -51,15 +49,12 @@ def ativos():
 
         for row in list(result):
             extrato = Movimentacao.query.filter_by(ativo_id=row[0]).all()
-            print(extrato)
             items.append({
                 "ativo_id":row[0],
-                "id_movimentacao":row[1],
-                "carteira_id":row[2],
-                "ticker":row[3],
-                "nome":row[4],
-                "tipo_ativo":row[5],
-                "preco_medio":float(row[6]),
+                "ticker":row[1],
+                "nome":row[2],
+                "tipo_ativo":row[3],
+                "preco_medio":row[4],
                 "extrato":[item.to_dict() for item in extrato]
             })
 
