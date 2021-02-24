@@ -7,11 +7,18 @@ import ListGroup from 'react-bootstrap/ListGroup'
 const FormExtrato = ({showModal,onHide,ativo}) => {
 
     const FormatDate = (date) => {
-        let miliseconds = Number(date)
-        
-        let DateFromMili = new Date(miliseconds)
+        let DateFormat;
 
-        let DateFormat = DateFromMili.toLocaleDateString()
+        if(date != null){
+            let miliseconds = Number(date)
+            
+            let DateFromMili = new Date(miliseconds)
+    
+            DateFormat = DateFromMili.toLocaleDateString()
+                
+        }else{
+            DateFormat = 'Não foi inserido data'
+        }
 
         return DateFormat
     }
@@ -21,9 +28,9 @@ const FormExtrato = ({showModal,onHide,ativo}) => {
         return (
             ativo.extrato.map((x,idx) => (
                 <ListGroup horizontal={x} className="my-2" key={idx}>
-                    <ListGroup.Item>Preco: {x.preco} </ListGroup.Item>
+                    <ListGroup.Item>Preco: R${parseFloat(x.preco).toFixed(2)} </ListGroup.Item>
                     <ListGroup.Item>Quantidade {x.quantidade} </ListGroup.Item>
-                    <ListGroup.Item>Taxas: {x.taxas} </ListGroup.Item>
+                    <ListGroup.Item>Taxas: R${parseFloat(x.taxas).toFixed(2)} </ListGroup.Item>
                     <ListGroup.Item>Data: {FormatDate(x.data)} </ListGroup.Item>
 
                 </ListGroup>
