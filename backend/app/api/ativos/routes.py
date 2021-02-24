@@ -2,7 +2,6 @@ from . import bp
 from app import cross_origin,db
 from flask import jsonify,request
 from app.models import Ativo,Movimentacao,TipoAtivo
-from sqlalchemy import text
 
 @bp.route('/',methods=['GET','POST'])
 @cross_origin()
@@ -30,20 +29,8 @@ def ativos():
             }),500
 
     try:
-
-        with db.engine.connect() as conn:
-            query = text("""
-                SELECT  DISTINCT mov.ativo_id,
-                        atv.ticker,
-                        nome,
-                        atv.tipo_ativo_id,
-                        f_preco_medio(mov.ativo_id) as preco_medio
-                FROM movimentacao mov
-                join ativo atv on
-                    mov.ativo_id = atv.id_ativo
-                where mov.tipo ='C';
-            """)
-            result = conn.execute(query).fetchall()
+        movimentacao_ = Movimentacao()
+        result = movimentacao_.get_preco_medio()
         
         items = []
 
@@ -51,10 +38,11 @@ def ativos():
             extrato = Movimentacao.query.filter_by(ativo_id=row[0]).all()
             items.append({
                 "ativo_id":row[0],
-                "ticker":row[1],
-                "nome":row[2],
-                "tipo_ativo":row[3],
-                "preco_medio":row[4],
+                "carteira":row[1],
+                "ticker":row[2],
+                "nome":row[3],
+                "tipo_ativo":row[4],
+                "preco_medio":row[5],
                 "extrato":[item.to_dict() for item in extrato]
             })
 

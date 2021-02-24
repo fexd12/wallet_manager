@@ -12,4 +12,4 @@ class Ativo(db.Model,AutoAttributes):
 
     movimentacao_ativo = db.relationship('Movimentacao', backref='movimentacao_ativo', lazy=True)
     
-    attrs = ['id_ativo','nome','ticker']
+    attrs = ['id_ativo','nome','ticker','tipo_ativo_id']
