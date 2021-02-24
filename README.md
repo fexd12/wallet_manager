@@ -77,5 +77,7 @@ Consider adding authentication and securing backend API's by following [Azure Ap
 - React Router - https://reacttraining.com/react-router/
 - Express - https://expressjs.com/
 - Bootstrap CSS - https://getbootstrap.com/
-# wallet_manager
+
+NAO USAR COMO METODO PARA DECLARAÇÃO DE IMPOSTO DE RENDA !!
+
 # wallet_manager
